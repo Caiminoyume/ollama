@@ -1,5 +1,6 @@
 compatibility_date = "2024-09-23"
 main = "src/index.ts"
+minify = true
 name = "ollama"
 upload_source_maps = true
 
