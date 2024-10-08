@@ -1,0 +1,10 @@
+compatibility_date = "2024-09-23"
+main = "src/index.ts"
+name = "ollama"
+upload_source_maps = true
+
+[ai]
+binding = "ai"
+
+[observability]
+enabled = true
