@@ -1,7 +1,7 @@
-name = "ollama"
-main = "src/index.ts"
 compatibility_date = "2024-10-04"
+main = "src/index.ts"
 minify = true
+name = "ollama"
 upload_source_maps = true
 
 [ai]
