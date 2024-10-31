@@ -4,9 +4,9 @@ import { GithubAI } from "./github"
 export const ModelRun: {
     [model: string]: (env: Env, question: question) => Promise<Response>
 } = {
-    "llama3.1": GithubAI("meta-llama-3.1-8b-instruct"), //8b
-    "llama3.1:70b": GithubAI("meta-llama-3.1-70b-instruct"),
-    "llama3.1:405b": GithubAI("meta-llama-3.1-405b-instruct"),
+    "llama3.1": GithubAI("Meta-Llama-3.1-8B-Instruct"), //8b
+    "llama3.1:70b": GithubAI("Meta-Llama-3.1-70B-Instruct"),
+    "llama3.1:405b": GithubAI("Meta-Llama-3.1-405B-Instruct"),
     "codellama": CloudflareAI("@hf/thebloke/codellama-7b-instruct-awq"), //7b
     "codellama:13b": unsupport,
     "codellama:34b": unsupport,
@@ -25,12 +25,12 @@ export const ModelRun: {
     "mixtral:8x22b": unsupport, //8x7b
     "mistral": CloudflareAI("@cf/mistral/mistral-7b-instruct-v0.2-lora"), //7b
     "mistral-large": GithubAI("Mistral-large"), //123b
-    "mistral-nemo": GithubAI("Mistral-nemo"), //12b
+    "mistral-nemo": GithubAI("Mistral-Nemo"), //12b
     "codestral": unsupport, //22b
     "aya": unsupport, //8b
     "aya:35b": unsupport,
-    "command-r": GithubAI("cohere-command-r"), //35b
-    "command-r-plus": GithubAI("cohere-command-r-plus"), //104b
+    "command-r": GithubAI("Cohere-command-r"), //35b
+    "command-r-plus": GithubAI("Cohere-command-r-plus"), //104b
     "deepseek-v2": unsupport, //16b
     "deepseek-v2:236b": unsupport,
     "deepseek-coder-v2": CloudflareAI("@hf/thebloke/deepseek-coder-6.7b-instruct-awq"), //16b
