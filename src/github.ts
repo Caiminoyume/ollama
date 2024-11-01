@@ -4,8 +4,12 @@ export const GithubAI = (model: GithubModels) => {
             method: 'POST',
             body: JSON.stringify({
                 messages: question.messages,
-                stream: true,
-                model: model
+                stream: question.stream,
+                model: model,
+                frequency_penalty: question.options.frequency_penalty,
+                presence_penalty: question.options.presence_penalty,
+                temperature: question.options.temperature,
+                top_p: question.options.top_p
             }),
             headers: {
                 "Authorization": env.GithubAuthorization,

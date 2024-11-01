@@ -2,7 +2,11 @@ export const CloudflareAI = (model: BaseAiTextGenerationModels) => {
     return async (env: Env, question: question): Promise<Response> => {
         const answer = await env.ai.run(model, {
             messages: question.messages,
-            stream: true
+            stream: question.stream,
+            frequency_penalty: question.options.frequency_penalty,
+            presence_penalty: question.options.presence_penalty,
+            temperature: question.options.temperature,
+            top_p: question.options.top_p
         }) as ReadableStream
 
         return new Response(answer
