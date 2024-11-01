@@ -7,7 +7,7 @@ export const CloudflareAI = (model: BaseAiTextGenerationModels) => {
             presence_penalty: question.options.presence_penalty,
             temperature: question.options.temperature,
             top_p: question.options.top_p
-        }) as ReadableStream
+        }, { gateway: { id: 'lobechat' } }) as ReadableStream
 
         return new Response(answer
             .pipeThrough(new TextDecoderStream())
