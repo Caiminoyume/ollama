@@ -14,11 +14,13 @@ export const CloudflareAI = (model: BaseAiTextGenerationModels) => {
             .pipeThrough(new TransformStream({
                 transform(chunk, controller) {
                     if (chunk === 'data: [DONE]\n\n') {
-                        controller.enqueue(`{"model":"${question.model}","done":true}\n\n`)
+                        controller.enqueue(JSON.stringify({ model: question.model, done: true }))
+                        controller.enqueue("\n\n")
                         controller.terminate()
                     } else {
                         const answer = JSON.parse(chunk.slice(6)) as CloudflareAnswer
-                        controller.enqueue(`{"model":"${question.model}","message":{"role":"assistant","content":"${answer.response}"},"done":false}\n\n`)
+                        controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: answer.response }, done: false }))
+                        controller.enqueue("\n\n")
                     }
                 }
             }))

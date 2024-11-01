@@ -31,13 +31,15 @@ export const GithubAI = (model: GithubModels) => {
                             const answer = JSON.parse(line) as GithubAnswer
                             answer.choices.forEach((choice) => {
                                 if (choice.delta.content) {
-                                    controller.enqueue(`{"model":"${question.model}","message":{"role":"assistant","content":"${choice.delta.content}"},"done":false}\n\n`)
+                                    controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: choice.delta.content }, done: false }))
+                                    controller.enqueue("\n\n")
                                 }
                             })
                         })
                     },
                     flush(controller) {
-                        controller.enqueue(`{"model":"${question.model}","done":true}\n\n`)
+                        controller.enqueue(JSON.stringify({ model: question.model, done: true }))
+                        controller.enqueue("\n\n")
                     }
                 }))
                 .pipeThrough(new TextEncoderStream()))
