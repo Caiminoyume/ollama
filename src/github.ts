@@ -25,16 +25,13 @@ export const GithubAI = (model: GithubModels) => {
                         buffer += chunk
                         const data = buffer.split('data: ')
                         buffer = data.pop() || ''
-                        data.forEach((line) => {
-                            if (line.length === 0)
-                                return
+                        data.filter(line => line.length !== 0).map((line) => {
                             const answer = JSON.parse(line) as GithubAnswer
-                            answer.choices.forEach((choice) => {
-                                if (choice.delta.content) {
-                                    controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: choice.delta.content }, done: false }))
-                                    controller.enqueue("\n\n")
-                                }
-                            })
+                            const choice = answer.choices[0]
+                            if (choice.delta.content) {
+                                controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: choice.delta.content }, done: false }))
+                                controller.enqueue("\n\n")
+                            }
                         })
                     },
                     flush(controller) {
