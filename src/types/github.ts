@@ -27,7 +27,8 @@ type GithubModels =
     "Mistral-Nemo" |
     "Mistral-large" |
     "Mistral-large-2407" |
-    "Mistral-small"
+    "Mistral-small" |
+    "jais-30b-chat"
 
 type GithubAnswer = {
     choices: {
