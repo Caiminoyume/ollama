@@ -12,8 +12,8 @@ export const GithubAI = (model: GithubModels) => {
                 top_p: question.options.top_p
             }),
             headers: {
-                "Authorization": env.GithubAuthorization,
-                "Content-Type": "application/json"
+                'Authorization': env.GithubAuthorization,
+                'Content-Type': 'application/json'
             }
         })
         if (response.body) {
@@ -29,14 +29,14 @@ export const GithubAI = (model: GithubModels) => {
                             const answer = JSON.parse(line) as GithubAnswer
                             const choice = answer.choices[0]
                             if (choice.delta.content) {
-                                controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: choice.delta.content }, done: false }))
-                                controller.enqueue("\n\n")
+                                controller.enqueue(JSON.stringify({ model: question.model, message: { role: 'assistant', content: choice.delta.content }, done: false }))
+                                controller.enqueue('\n\n')
                             }
                         })
                     },
                     flush(controller) {
                         controller.enqueue(JSON.stringify({ model: question.model, done: true }))
-                        controller.enqueue("\n\n")
+                        controller.enqueue('\n\n')
                     }
                 }))
                 .pipeThrough(new TextEncoderStream()))

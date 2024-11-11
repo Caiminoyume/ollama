@@ -1,10 +1,10 @@
-import { ModelRun, ModelList } from "./models"
+import { ModelRun, ModelList } from './models'
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const { pathname } = new URL(request.url)
 		if (request.method === 'GET' && pathname === '/api/tags') {
-			return new Response(JSON.stringify(ModelList), { headers })
+			return Response.json(ModelList, { headers })
 
 		} else if (request.method === 'OPTIONS' && pathname === '/api/tags') {
 			return new Response(null, { headers })

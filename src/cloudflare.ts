@@ -15,12 +15,12 @@ export const CloudflareAI = (model: BaseAiTextGenerationModels) => {
                 transform(chunk, controller) {
                     if (chunk === 'data: [DONE]\n\n') {
                         controller.enqueue(JSON.stringify({ model: question.model, done: true }))
-                        controller.enqueue("\n\n")
+                        controller.enqueue('\n\n')
                         controller.terminate()
                     } else {
                         const answer = JSON.parse(chunk.slice(6)) as CloudflareAnswer
-                        controller.enqueue(JSON.stringify({ model: question.model, message: { role: "assistant", content: answer.response }, done: false }))
-                        controller.enqueue("\n\n")
+                        controller.enqueue(JSON.stringify({ model: question.model, message: { role: 'assistant', content: answer.response }, done: false }))
+                        controller.enqueue('\n\n')
                     }
                 }
             }))
